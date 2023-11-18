@@ -22,7 +22,8 @@
       - restart sshd
 
     - name: Install nginx
-      openbsd_pkg: nginx
+      openbsd_pkg:
+        name: nginx
   handlers:
     - name: restart sshd
       service: name=sshd state=restarted
