@@ -33,7 +33,7 @@
         mode: 0600
       with_fileglob:
         - fozzey_ru.*
-    - name: Copy nginx config
+    - name: Set nginx config
       copy:
         src: nginx.conf
         dest: /etc/nginx/
@@ -47,3 +47,8 @@
       service: name=sshd state=restarted
     - name: restart nginx
       service: name=nginx state=restarted enabled=yes
+
+    - name: Sync content
+      synchronize:
+        src: html/
+        dest: /var/www/html/
