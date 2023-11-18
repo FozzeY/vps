@@ -3,4 +3,19 @@
   hosts: all
   tasks:
     - name: Apply all available system patches
-      community.general.syspatch:
+      syspatch:
+
+    - name: Set sshd config
+      copy:
+        src: sshd_config
+        dest: /etc/ssh/sshd_config
+        owner: root
+        group: wheel
+        mode: 0644
+        validate: '/usr/sbin/sshd -T -f %s'
+      notify:
+      - restart sshd
+
+  handlers:
+    - name: restart sshd
+      service: name=sshd state=restarted
