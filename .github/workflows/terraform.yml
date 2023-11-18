@@ -40,6 +40,8 @@ jobs:
 
       - name: Terraform Plan
         id: plan
+        env:
+          VULTR_API_KEY = ${{ secrets.VULTR_API_KEY }}
         run: terraform plan -input=false
 
       - name: Terraform Apply
