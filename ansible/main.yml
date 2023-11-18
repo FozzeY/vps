@@ -26,7 +26,7 @@
         name: nginx
     - name: Copy certs
       copy:
-        src: {{ item }}
+        src: "{{ item }}"
         dest: /etc/ssl/
         owner: root
         group: wheel
