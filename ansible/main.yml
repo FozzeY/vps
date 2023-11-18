@@ -51,7 +51,7 @@
         dest: /var/www/html/
         owner: root
         group: daemon
-        permissions: 0644
+        mode: 0644
   handlers:
     - name: restart sshd
       service: name=sshd state=restarted
