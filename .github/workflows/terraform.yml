@@ -9,7 +9,7 @@ on:
 jobs:
   terraform:
     name: "Terraform"
-    runs-on: Local
+    runs-on: self-hosted
     permissions:
       pull-requests: write
     steps:
