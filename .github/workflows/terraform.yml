@@ -10,7 +10,7 @@ on:
       - master
     paths:
       - terraform
-  workflow_dispatch:
+      - .github/workflows/terraform.yml
 jobs:
   terraform:
     name: "Terraform"
