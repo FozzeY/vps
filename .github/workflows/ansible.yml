@@ -1,4 +1,4 @@
-name: "Terraform"
+name: "Ansible"
 
 defaults:
   run:
@@ -8,8 +8,8 @@ on:
   push:
     branches:
       - master
-  paths:
-    - terraform
+    paths:
+      - ansible
 jobs:
   ansible:
     name: "Ansible"
