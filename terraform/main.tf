@@ -24,6 +24,6 @@ resource "vultr_ssh_key" "personal" {
 
 data "vultr_instance" "current" {
   filter {
-    name   = "fozzey.ru-old"
+    name = "fozzey.ru-old"
   }
 }
