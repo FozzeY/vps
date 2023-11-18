@@ -1,9 +1,5 @@
 name: "Ansible"
 
-defaults:
-  run:
-    working-directory: ansible
-
 on:
   push:
     branches:
@@ -26,6 +22,7 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: main.yml
+          directory: ansible
           key: ${{secrets.SSH_PRIVATE_KEY}}
           inventory: |
             [all]
