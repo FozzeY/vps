@@ -29,6 +29,10 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        
+     - run: echo ${{ steps.init.outputs.stdout }}
+     - run: echo ${{ steps.init.outputs.stderr }}
+     - run: echo ${{ steps.init.outputs.exitcode }}
 
       - name: Terraform Validate
         id: validate
@@ -37,9 +41,6 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color -input=false
-      - run: echo ${{ steps.plan.outputs.stdout }}
-      - run: echo ${{ steps.plan.outputs.stderr }}
-      - run: echo ${{ steps.plan.outputs.exitcode }}
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
