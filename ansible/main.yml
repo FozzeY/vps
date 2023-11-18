@@ -4,6 +4,11 @@
   tasks:
     - name: Apply all available system patches
       syspatch:
+      register: syspatch
+
+    - name: Reboot if patch requires it
+      reboot:
+      when: syspatch.reboot_needed
 
     - name: Set sshd config
       copy:
