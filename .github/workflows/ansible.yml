@@ -9,7 +9,7 @@ on:
     branches:
       - master
     paths:
-      - ansible
+      - ansible/**
       - .github/workflows/ansible.yml
 
 jobs:

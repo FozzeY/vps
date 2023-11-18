@@ -9,7 +9,7 @@ on:
     branches:
       - master
     paths:
-      - terraform
+      - terraform/**
       - .github/workflows/terraform.yml
 jobs:
   terraform:
