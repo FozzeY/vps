@@ -30,6 +30,6 @@ jobs:
           mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
           echo "fozzey.ru ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhNKNb3ra00bOWTiC7qu1qA7dBWkKHupnLUGljgkqz+" > ~/.ssh/known_hosts
       - name: Bootstrap ansible
-        run: ansible -i fozzey.ru, -u root --key-file ssh_private_key -m raw -a "pkg_add python%3.8" all
+        run: ansible -vvvv -i fozzey.ru, -u root --key-file ssh_private_key -m raw -a "pkg_add python%3.8" all
       - name: Test Ansible
         run: ansible-playbook -i fozzey.ru, --key-file ssh_private_key main.yml
