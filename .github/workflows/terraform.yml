@@ -1,10 +1,13 @@
 name: "Terraform"
 
+defaults:
+  run:
+    working-directory: terraform
+
 on:
   push:
     branches:
       - master
-  pull_request:
 
 jobs:
   terraform:
@@ -21,7 +24,6 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: false
 
       - name: Terraform Format
         id: fmt
@@ -30,10 +32,6 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
-        
-      - run: echo ${{ steps.init.outputs.stdout }}
-      - run: echo ${{ steps.init.outputs.stderr }}
-      - run: echo ${{ steps.init.outputs.exitcode }}
 
       - name: Terraform Validate
         id: validate
