@@ -24,6 +24,7 @@
     - name: Install nginx
       openbsd_pkg:
         name: nginx
+
     - name: Copy certs
       copy:
         src: "{{ item }}"
@@ -33,6 +34,7 @@
         mode: 0600
       with_fileglob:
         - fozzey_ru.*
+
     - name: Set nginx config
       copy:
         src: nginx.conf
@@ -42,13 +44,13 @@
         mode: 0644
       notify:
       - restart nginx
-  handlers:
-    - name: restart sshd
-      service: name=sshd state=restarted
-    - name: restart nginx
-      service: name=nginx state=restarted enabled=yes
 
     - name: Sync content
       synchronize:
         src: html/
         dest: /var/www/html/
+  handlers:
+    - name: restart sshd
+      service: name=sshd state=restarted
+    - name: restart nginx
+      service: name=nginx state=restarted enabled=yes
