@@ -42,6 +42,10 @@
         mode: 0644
       notify:
       - restart nginx
+    - name: Enable nginx
+      service:
+        name: nginx
+        enabled: yes
   handlers:
     - name: restart sshd
       service: name=sshd state=restarted
