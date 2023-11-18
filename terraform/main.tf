@@ -22,13 +22,6 @@ resource "vultr_ssh_key" "personal" {
   ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK0c3l5L+HP1YKTfR7q0SG1lPLTon6PfFZHrjpplTbll admin@fozzey.ru"
 }
 
-data "vultr_instance" "current" {
-  filter {
-    name   = "label"
-    values = ["fozzey.ru-old"]
-  }
-}
-
 data "vultr_os" "openbsd-74" {
   filter {
     name   = "name"
