@@ -27,4 +27,8 @@ jobs:
         run: ansible -m raw -a "pkg_add python%3.8" fozzey.ru
 
       - name: Test Ansible
-        run: ansible-playbook -i fozzey.ru --private-key ${{ secrets.SSH_PRIVATE_KEY }} main.yml
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo $SSH_PRIVATE_KEY >> ssh_private_key
+          ansible-playbook -i fozzey.ru --private-key ssh_private_key main.yml
