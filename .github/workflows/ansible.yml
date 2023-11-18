@@ -1,0 +1,28 @@
+name: "Terraform"
+
+defaults:
+  run:
+    working-directory: ansible
+
+on:
+  push:
+    branches:
+      - master
+  paths:
+    - terraform
+jobs:
+  ansible:
+    name: "Ansible"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Bootstrap ansible
+        run: ansible -m raw -a "pkg_add python%3.8" fozzey.ru
+
+      - name: Test Ansible
+        run: ansible-playbook -i fozzey.ru --private-key ${{ secrets.SSH_PRIVATE_KEY }} main.yml

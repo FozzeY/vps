@@ -1,0 +1,6 @@
+---
+- name: Configure the server
+  hosts: all
+  tasks:
+    - name: Apply all available system patches
+      community.general.syspatch:
