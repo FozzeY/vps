@@ -28,3 +28,25 @@ data "vultr_instance" "current" {
     values = ["fozzey.ru-old"]
   }
 }
+
+data "vultr_os" "openbsd-74" {
+  filter {
+    name   = "name"
+    values = ["OpenBSD 7.4 x64"]
+  }
+}
+
+resource "vultr_instance" "this" {
+  region      = "waw"
+  plan        = "vhp-1c-1gb-amd"
+  os_id       = data.vultr_os.openbsd-74.id
+  label       = "fozzey.ru"
+  hostname    = "fozzey.ru"
+  enable_ipv6 = true
+  ssh_key_ids = [vultr_ssh_key.ansible.id, vultr_ssh_key.personal.id]
+}
+
+resource "vultr_instance_ipv4" "this" {
+  instance_id = vultr_instance.this.id
+  reboot      = false
+}
