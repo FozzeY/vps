@@ -22,15 +22,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Configure SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          echo $SSH_PRIVATE_KEY | tr -d '\r' > ssh_private_key && chmod 600 ssh_private_key
-          mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
-          echo "fozzey.ru ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhNKNb3ra00bOWTiC7qu1qA7dBWkKHupnLUGljgkqz+" > ~/.ssh/known_hosts
-          ssh root@fozzey.ru -i ssh_private_key
-      - name: Bootstrap ansible
-        run: ansible -vvvv -i fozzey.ru, -u root --key-file ssh_private_key -m raw -a "pkg_add python%3.8" all
-      - name: Test Ansible
-        run: ansible-playbook -i fozzey.ru, --key-file ssh_private_key main.yml
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: main.yml
+          directory: ./
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          inventory: |
+            [all]
+            fozzey.ru
+          known_hosts: |
+            fozzey.ru ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhNKNb3ra00bOWTiC7qu1qA7dBWkKHupnLUGljgkqz+
