@@ -45,10 +45,13 @@
       notify:
       - restart nginx
 
-    - name: Sync content
-      synchronize:
+    - name: Upload content
+      copy:
         src: html/
         dest: /var/www/html/
+        owner: root
+        group: daemon
+        permissions: 0644
   handlers:
     - name: restart sshd
       service: name=sshd state=restarted
