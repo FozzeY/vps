@@ -33,6 +33,17 @@
         mode: 0600
       with_fileglob:
         - fozzey_ru.*
+    - name: Copy nginx config
+      copy:
+        src: nginx.conf
+        dest: /etc/nginx/
+        owner: root
+        group: wheel
+        mode: 0644
+      notify:
+      - restart nginx
   handlers:
     - name: restart sshd
       service: name=sshd state=restarted
+    - name: restart nginx
+      service: name=nginx state=restarted
