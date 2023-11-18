@@ -24,11 +24,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Bootstrap ansible
-        run: ansible -m raw -a "pkg_add python%3.8" fozzey.ru
+        run: ansible -i fozzey.ru, -m raw -a "pkg_add python%3.8"
 
       - name: Test Ansible
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo $SSH_PRIVATE_KEY >> ssh_private_key
-          ansible-playbook -i fozzey.ru --private-key ssh_private_key main.yml
+          ansible-playbook -i fozzey.ru, --private-key ssh_private_key main.yml
