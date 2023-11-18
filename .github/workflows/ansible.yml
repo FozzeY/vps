@@ -10,6 +10,8 @@ on:
       - master
     paths:
       - ansible
+  workflow_dispatch:
+
 jobs:
   ansible:
     name: "Ansible"
