@@ -26,10 +26,9 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo $SSH_PRIVATE_KEY > ssh_private_key
-          mkdir .ssh
-          ls .ssh
-          echo "fozzey.ru ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhNKNb3ra00bOWTiC7qu1qA7dBWkKHupnLUGljgkqz+" > ~/.ssh/known_hosts
+          echo $SSH_PRIVATE_KEY >> ssh_private_key
+          mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
+          echo "fozzey.ru ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhNKNb3ra00bOWTiC7qu1qA7dBWkKHupnLUGljgkqz+" >> ~/.ssh/known_hosts
       - name: Bootstrap ansible
         run: ansible -i fozzey.ru, --key-file ssh_private_key -m raw -a "pkg_add python%3.8" all
       - name: Test Ansible
