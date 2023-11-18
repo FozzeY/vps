@@ -24,6 +24,15 @@
     - name: Install nginx
       openbsd_pkg:
         name: nginx
+    - name: Copy certs
+      copy:
+        src: {{ item }}
+        dest: /etc/ssl/
+        owner: root
+        group: wheel
+        mode: 0600
+      with_fileglob:
+        - fozzey_ru.*
   handlers:
     - name: restart sshd
       service: name=sshd state=restarted

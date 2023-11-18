@@ -22,13 +22,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - name: Cert files
+        env:
+          FOZZEY_RU_CRT: ${{ secrets.FOZZEY_RU_CRT }}
+          FOZZEY_RU_KEY: ${{ secrets.FOZZEY_RU_KEY }}
+        run: |
+          echo $FOZZEY_RU_CRT > fozzey_ru.crt
+          echo $FOZZEY_RU_KEY > fozzey_ru.key
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: main.yml
           directory: ansible
-          key: ${{secrets.SSH_PRIVATE_KEY}}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           inventory: |
             [all]
             fozzey.ru
