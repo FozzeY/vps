@@ -29,3 +29,5 @@ jobs:
             fozzey.ru
           known_hosts: |
             fozzey.ru ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhNKNb3ra00bOWTiC7qu1qA7dBWkKHupnLUGljgkqz+
+          options: |
+            --user root
