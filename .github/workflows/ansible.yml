@@ -1,5 +1,9 @@
 name: "Ansible"
 
+defaults:
+  run:
+    working-directory: ansible
+
 on:
   push:
     branches:
