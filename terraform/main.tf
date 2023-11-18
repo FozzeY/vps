@@ -45,8 +45,3 @@ resource "vultr_instance" "this" {
   enable_ipv6 = true
   ssh_key_ids = [vultr_ssh_key.ansible.id, vultr_ssh_key.personal.id]
 }
-
-resource "vultr_instance_ipv4" "this" {
-  instance_id = vultr_instance.this.id
-  reboot      = false
-}
