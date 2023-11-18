@@ -1,11 +1,21 @@
 terraform {
   cloud {
     organization = "imel"
-
     workspaces {
       name = "vps"
     }
   }
+  required_providers {
+    vultr = {
+      source  = "vultr/vultr"
+    }
+  }
+}
+
+provider "vultr" {
+  api_key = ${{ secrets.VULTR_API_TOKEN }}
+  rate_limit = 100
+  retry_limit = 3
 }
 
 resource "vultr_ssh_key" "ansible" {
