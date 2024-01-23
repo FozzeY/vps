@@ -19,7 +19,8 @@ resource "vultr_ssh_key" "ansible" {
 
 resource "vultr_ssh_key" "personal" {
   name    = "Personal"
-  ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK0c3l5L+HP1YKTfR7q0SG1lPLTon6PfFZHrjpplTbll admin@fozzey.ru"
+  ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJP1YicVpdk9zzalUa+3MbQWAhFRAMLTEHAgbBiN8/Xu admin@fozzey.ru
+"
 }
 
 data "vultr_os" "openbsd-74" {
